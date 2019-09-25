@@ -25,7 +25,7 @@ export default new Vuex.Store({
     error_msg: '',
     snackbar: false,
     succes_msg: '',
-    authenticated: false,
+    authenticated: true,
     loading: false,
     sort_options: { sort: 'name', reverse: false },
   },
@@ -47,37 +47,28 @@ export default new Vuex.Store({
       // push in array for graph
       state.download_data.splice(0, 1)
       if (_stats.dlspeed.indexOf('KB' > -1)) {
-        state.download_data.push(
-          _stats.dlspeed.substring(0, _stats.dlspeed.indexOf(' ')) / 1000,
-        )
+        state.download_data.push(_stats.dlspeed.substring(0, _stats.dlspeed.indexOf(' ')) / 1000)
       } else {
-        state.download_data.push(
-          _stats.dlspeed(0, _stats.dlspeed.indexOf(' ')),
-        )
+        state.download_data.push(_stats.dlspeed(0, _stats.dlspeed.indexOf(' ')))
       }
       state.upload_data.splice(0, 1)
       if (_stats.upspeed.indexOf('KB' > -1)) {
-        state.upload_data.push(
-          _stats.upspeed.substring(0, _stats.upspeed.indexOf(' ')) / 1000,
-        )
+        state.upload_data.push(_stats.upspeed.substring(0, _stats.upspeed.indexOf(' ')) / 1000)
       } else {
-        state.upload_data.push(
-          _stats.upspeed.substring(0, _stats.upspeed.indexOf(' ')),
-        )
+        state.upload_data.push(_stats.upspeed.substring(0, _stats.upspeed.indexOf(' ')))
       }
       state.stats = _stats
     },
     CLEAR_INTERVALS: (state) => {
-      if (state.intervals.length > 1) { state.intervals.forEach((el) => clearInterval(el)) }
+      if (state.intervals.length > 1) {
+        state.intervals.forEach((el) => clearInterval(el))
+      }
     },
     ADD_SELECTED: (state, payload) => {
       state.selected_torrents.push(payload)
     },
     REMOVE_SELECTED: (state, payload) => {
-      state.selected_torrents.splice(
-        state.selected_torrents.indexOf(payload),
-        1,
-      )
+      state.selected_torrents.splice(state.selected_torrents.indexOf(payload), 1)
     },
     RESET_SELECTED: (state) => {
       state.selected_torrents = []
@@ -163,6 +154,8 @@ export default new Vuex.Store({
         state.loading = false
       }
     },
+    LOAD_SETTINGS: async (state) => {},
+    SAVE_SETTINGS: async (state, payload) => {},
   },
   actions: {
     REFRESH_TORRENTS: (context) => {

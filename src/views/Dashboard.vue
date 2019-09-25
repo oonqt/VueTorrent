@@ -235,7 +235,7 @@ export default {
     }
   },
   created: function() {
-    this.$store.dispatch("REFRESH_TORRENTS");
+   // this.$store.dispatch("REFRESH_TORRENTS");
   }
 };
 </script>

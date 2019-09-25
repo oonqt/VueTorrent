@@ -10,7 +10,7 @@
       <v-spacer></v-spacer>
 
       <!--right corner functions-->
-      <AddTorrent @torrentAdded="snackbar = true"/>
+      <AddTorrent @torrentAdded="snackbar = true" />
       <v-btn small fab flat class="mr-0 ml-0" @click="removeTorrents">
         <v-icon color="grey">remove</v-icon>
       </v-btn>
@@ -84,9 +84,32 @@
           </v-layout>
         </v-card>
       </v-flex>
+      <!-- Different torrent clients -->
+      <div class="secondary_lighter--text text-uppercase caption ml-4">torrent clients</div>
+      <v-card flat color="secondary" class="mr-2 ml-2">
+        <v-layout row wrap :class="`pa-3 project nav_download`">
+          <v-flex md6>
+            <div class="download--text">Qbittorrent</div>
+          </v-flex>
+          <v-flex md5 class="mr-2">
+            <span class="download--text title pl-3"></span>
+          </v-flex>
+        </v-layout>
+      </v-card>
+      <v-card flat color="secondary" class="mr-2 ml-2 mt-2">
+        <v-layout row wrap :class="`pa-3 project nav_download`">
+          <v-flex md6>
+            <div class="download--text">Transmission</div>
+          </v-flex>
+          <v-flex md5 class="mr-2">
+            <span class="download--text title pl-3"></span>
+          </v-flex>
+        </v-layout>
+      </v-card>
+      <!--END -->
       <v-spacer></v-spacer>
       <v-layout class="align-end">
-        <Settings/>
+        <Settings />
         <v-spacer></v-spacer>
         <v-tooltip top v-if="paused">
           <v-btn small fab flat class="mr-4" @click="startInterval" slot="activator">
@@ -114,7 +137,7 @@ export default {
   components: { AddTorrent, Settings },
   data() {
     return {
-      drawer: false,
+      drawer: true,
       paused: false,
       links: [
         { icon: "dashboard", text: "Dashboard", route: "/" },
@@ -194,7 +217,7 @@ export default {
     }
   },
   created: function() {
-    this.$store.dispatch("REFRESH_SESSION_STATS");
+    // this.$store.dispatch("REFRESH_SESSION_STATS");
   },
   computed: {
     ...mapState(["stats", "snackbar_error", "error_msg", "snackbar"])
